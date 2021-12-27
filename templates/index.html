@@ -1,0 +1,15 @@
+{% extends "_layout.html" %}
+{% block body %}
+    {% include "includes/_navbar.html" %}
+    <h1>인덱스 페이지</h1>
+    <h2>성은 {{ second_name }}이요 이름은 {{ first_name }}!!!</h2>
+    <img src="/plot" alt="graph image">
+    <form action="/preprocessing" method="post">
+        <input type="submit" value="데이터전처리">
+    </form>
+    <ol  id="preprocessing">
+        {% for i in results %}
+        <a href="/dataframe/{{i}}"><li>{{i}}</li></a>
+        {% endfor %}
+    </ol>
+{% endblock %}

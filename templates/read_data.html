@@ -1,0 +1,15 @@
+{% extends "_layout.html" %}
+{% block body %}
+{% include "includes/_navbar.html" %}
+    <form action="/read_data" method="post">
+        <select class="form-select" name="index" aria-label="Default select example">
+            <option selected>데이터를 고르시오</option>
+            {% for result in results %}
+            <option value="{{result}}">{{result}}</option>
+            {% endfor %}
+            
+        </select>
+        <input type="submit" class="btn btn-danger" value="조회하기">
+    </form>
+  
+{% endblock %}

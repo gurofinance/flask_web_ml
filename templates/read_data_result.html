@@ -1,0 +1,61 @@
+{% extends "_layout.html" %}
+{% block body %}
+{% include "includes/_navbar.html" %}
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">{{name}}</h6>
+        <form action="/remove/{{name}}" method="post">
+            <input type="submit" class="btn btn-danger" value="삭제하기" onclick="return confirm('정말 삭제하시겠습니까?')">
+        </form>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        {% for column in columns %}
+                            <th>{{ column }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        {% for column in columns %}
+                            <th>{{ column }}</th>
+                        {% endfor %}
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for i in range(data | length)  %}
+                        <tr>
+                            {% for j in columns%}
+                                
+                                    <td>{{ data[i][j]}}</td>
+                            
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- DataTales EDIT -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">{{name}} 편집</h6>
+    </div>
+    <div class="card-body">
+        <form action="/dataframe/{{name}}" method="POST">
+            {% for column in columns  %}
+            <div class="form-check form-check-inline">
+                <input class="form-check-input"  type="checkbox" name="column" id="inlineCheckbox1" value={{column}}>
+                <label class="form-check-label" for="inlineCheckbox1">{{column}}</label>
+            </div>                
+            {% endfor %}
+            <input type="submit"  class="btn btn-primary btn-lg" value="편집하기" >
+        </form>        
+    </div>
+</div>  
+{% endblock %}

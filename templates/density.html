@@ -1,0 +1,32 @@
+{% extends "_layout.html" %}
+{% block body %}
+{% include "includes/_navbar.html" %}
+    <form action="/density" , method="POST">
+        <label for="column">Choose a Column Name:</label>
+
+        <select name="column" id="column">
+        <option value="" selected disabled>컬럼선택</option> 
+        <option value="Pclass">Pclass</option>
+        <option value="Age">Age</option>
+        <option value="Fare">Fare</option>
+        </select>
+        <input type="submit" value="그래프보기">
+    </form>
+    <script>  
+        function chageLangSelect(){  
+        var langSelect = document.getElementById("column");  
+          
+        // select element에서 선택된 option의 value가 저장된다.  
+        var selectValue = langSelect.options[langSelect.selectedIndex].value;  
+          
+        // select element에서 선택된 option의 text가 저장된다.  
+        var selectText = langSelect.options[langSelect.selectedIndex].text;  
+        }  
+        </script>  
+    {% if url == None %}
+        <h3>No IMAGE</h3>
+    {% else %} 
+        <h3>{{name}}</h3>
+        <img src="{{url}}" alt="vvewv">
+    {% endif %}
+{% endblock %}
