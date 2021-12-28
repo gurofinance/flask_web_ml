@@ -6,6 +6,7 @@ import numpy as np
 import random
 import io
 from pymongo import MongoClient
+import pickle
 
 import pandas as pd
 from bson.objectid import ObjectId
@@ -131,6 +132,26 @@ def data_remove(name):
     collection.delete_many({'index':name})
     return redirect('/read_data')
 
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    model_name = request.form.get('model_name')
+    with open(f'models/{model_name}', 'rb') as f:
+        model = pickle.load(f)
+#         data = [[1.799e+01, 1.038e+01, 1.228e+02 ,1.001e+03 ,1.184e-01 ,2.776e-01, 3.001e-01,
+#  1.471e-01, 2.419e-01 ,7.871e-02,1.095e+00, 9.053e-01, 8.589e+00, 1.534e+02,
+#  6.399e-03 ,4.904e-0, 5.373e-02 ,1.587e-02 ,3.003e-02, 6.193e-03, 2.538e+01,
+#  1.733e+01 ,1.846e+02, 2.019e+03, 1.622e-01 ,6.656e-01, 7.119e-01, 2.654e-01,
+#  4.601e-01 ,1.189e-01]]
+        income = request.form.get('Income')
+        hage = request.form.get('House Age')
+        rooms = request.form.get('Rooms')
+        bedrooms = request.form.get('Bedrooms')
+        population = request.form.get('Population')
+        data = [[income, hage, rooms, bedrooms,population ]]
+        pred = model.predict(data)
+        print(pred)
+        return render_template('predict.html', result=pred)
 
 if __name__ == "__main__":
     app.run(debug=True)

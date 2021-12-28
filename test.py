@@ -1,4 +1,4 @@
-# import pandas as pd
+import pandas as pd
 
 # df = pd.read_csv('static/csv_file/final_test.csv', encoding='utf-8')
 
@@ -8,6 +8,7 @@ from pymongo import MongoClient
 
 import pandas as pd
 from bson.objectid import ObjectId
+from sklearn.datasets import load_breast_cancer
 
 client = MongoClient('mongodb+srv://root:1234@cluster0.il3ga.mongodb.net/guro?retryWrites=true&w=majority&tls=true&tlsAllowInvalidCertificates=true')
 
@@ -27,7 +28,12 @@ post = {"author": "KIM",
 # print(data)
 # print(collection.find())
 
-df = pd.read_csv('datasets/test.csv', encoding='utf-8')
+df = pd.read_csv('datasets/USA_Housing.csv', encoding='utf-8')
+# cancer = load_breast_cancer()
+# print(cancer.data[0])
+# data_df = pd.DataFrame(cancer.data, columns=cancer.feature_names)
+# print(len(data_df.columns))
+# print(cancer)
 # df.drop(['Unnamed: 0'] , axis=1, inplace=True)
 # df_dict = df.to_dict('records')
 # insert_data = {
@@ -66,9 +72,10 @@ df = pd.read_csv('datasets/test.csv', encoding='utf-8')
 df_dict = df.to_dict('records')
 # print(df_age_fare_sex_male)
 insert_data = {
-    "index":"df_test",
+    "index":"usa_housing_df",
     "data":df_dict,
     "date":datetime.datetime.utcnow()
 }
+
 
 collection.insert_one(insert_data)

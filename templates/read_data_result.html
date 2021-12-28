@@ -58,4 +58,42 @@
         </form>        
     </div>
 </div>  
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">{{name}} 예측</h6>
+    </div>
+    <div class="card-body">
+<!-- <form action="/predict" method="post">
+    <select class="form-select" name="model_name" aria-label="Default select example">
+        <option selected>모델를 고르시오</option>
+        
+        <option value="lr_model.pkl">Logistic_Regression</option>
+        <option value="knn_model.pkl">K_Nearest_Neighbors</option>
+        <option value="voting_model.pkl">Voting Ensemble</option>
+    </select>
+
+    <input type="submit" class="btn btn-danger" value="예측하기">
+</form> -->
+
+
+<form action="/predict" method="post">
+    <select class="form-select" name="model_name" aria-label="Default select example" required>
+        <option selected>모델를 고르시오</option>
+        
+        <option value="linear_model.pkl">Linear_Regression</option>
+        
+    </select>
+
+    <p>다음을 입력하세요</p>
+    <input type="text" name="Income" id="" placeholder="수입">
+    <input type="text" name="House Age" id="" placeholder="건물나이">
+    <input type="text" name="Rooms" id="" placeholder="방개수">
+    <input type="text" name="Bedrooms" id="" placeholder="침실개수">
+    <input type="text" name="Population" id="" placeholder="인구수">
+
+
+    <input type="submit" class="btn btn-danger" value="예측하기">
+</form>
+</div>
+</div>
 {% endblock %}
