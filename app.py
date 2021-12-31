@@ -152,6 +152,14 @@ def predict():
         pred = model.predict(data)
         print(pred)
         return render_template('predict.html', result=pred)
+@app.route('/machine_learning/<name>', methods=['GET', 'POST'])
+def machine_learning(name):
+    input_list = request.form.getlist('input_column')
+    label = request.form.get('label_column')
+    print(input_list)
+    result = collection.find_one({"index":name})
+    
+    return result
 
 if __name__ == "__main__":
     app.run(debug=True)

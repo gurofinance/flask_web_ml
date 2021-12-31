@@ -47,14 +47,25 @@
         <h6 class="m-0 font-weight-bold text-primary">{{name}} 편집</h6>
     </div>
     <div class="card-body">
-        <form action="/dataframe/{{name}}" method="POST">
+        <form action="/machine_learning/{{name}}" method="POST">
+            <h6 class="m-0 font-weight-bold text-primary">독립변수 선택</h6>
             {% for column in columns  %}
             <div class="form-check form-check-inline">
-                <input class="form-check-input"  type="checkbox" name="column" id="inlineCheckbox1" value={{column}}>
+                <input class="form-check-input"  type="checkbox" name="input_column" id="inlineCheckbox1" value='{{column}}'>
                 <label class="form-check-label" for="inlineCheckbox1">{{column}}</label>
             </div>                
             {% endfor %}
-            <input type="submit"  class="btn btn-primary btn-lg" value="편집하기" >
+
+            <h6 class="m-0 font-weight-bold text-primary">종속변수 선택</h6>
+            {% for column in columns  %}
+            <div class="form-check form-check-inline">
+                
+                <input class="form-check-input"  type="checkbox" name="label_column" id="inlineCheckbox1" value={{column}}>
+                <label class="form-check-label" for="inlineCheckbox1">{{column}}</label>
+            </div> 
+            {% endfor %}
+            <br>
+            <input type="submit"  class="btn btn-primary btn-lg" value="예측페이지로 가기" >
         </form>        
     </div>
 </div>  
